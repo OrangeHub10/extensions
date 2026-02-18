@@ -1,1 +1,82 @@
-(function(Scratch) {   'use strict';    class DataConverter {     getInfo() {       return {         id: 'dataconverter',         name: 'TurboBytes',         color1: '#ff4c4c',         blocks: [           {             opcode: 'getConvertedSize',             blockType: Scratch.BlockType.REPORTER,             text: 'Bytes of [TEXTO] in [UNIT]',             arguments: {               TEXTO: {                 type: Scratch.ArgumentType.STRING,                 defaultValue: 'Bytes'               },               UNIT: {                 type: Scratch.ArgumentType.STRING,                 menu: 'unitsMenu',                 defaultValue: 'Bytes'               }             }           }         ],         menus: {           unitsMenu: {             acceptReporters: true,             items: ['Bytes', 'Kilobytes', 'Megabytes', 'Gigabytes',  'Terabytes',  'Petabytes',  'Exabytes',  'Zettabytes',  'Yottabytes',  'Bits',  'Nibbles',  'Kibibytes']           }         }       };     }      getConvertedSize(args) {       const bytes = new Blob([args.TEXTO]).size;       const unit = args.UNIT;        switch (unit) {         case 'Kilobytes':           return bytes / 1000;         case 'Megabytes':           return bytes / Math.pow(1024, 2);         case 'Gigabytes':            return bytes / Math.pow(1024, 3);           case 'Terabytes':            return bytes / Math.pow(1024, 4);         case 'Petabytes':          return bytes / Math.pow(1024, 5);        case 'Exabytes':         return bytes / Math.pow(1024, 6);        case  'Zettabytes':         return bytes / Math.pow(1024, 7);        case  'Yottabytes':         return bytes / Math.pow(1024, 8);        case  'Bytes':         return bytes;         case  'Bits' :         return bytes * 8;         case 'Nibbles' :         return bytes * 2;         case 'Kibibytes' :         return bytes / 1024;         default: return 0;       }     }   }    Scratch.extensions.register(new DataConverter()); })(Scratch);
+(function (Scratch) {
+  "use strict";
+  class DataConverter {
+    getInfo() {
+      return {
+        id: "dataconverter",
+        name: "TurboBytes",
+        color1: "#ff4c4c",
+        blocks: [
+          {
+            opcode: "getConvertedSize",
+            blockType: Scratch.BlockType.REPORTER,
+            text: "Bytes of [TEXTO] in [UNIT]",
+            arguments: {
+              TEXTO: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: "Bytes",
+              },
+              UNIT: {
+                type: Scratch.ArgumentType.STRING,
+                menu: "unitsMenu",
+                defaultValue: "Bytes",
+              },
+            },
+          },
+        ],
+        menus: {
+          unitsMenu: {
+            acceptReporters: true,
+            items: [
+              "Bytes",
+              "Kilobytes",
+              "Megabytes",
+              "Gigabytes",
+              "Terabytes",
+              "Petabytes",
+              "Exabytes",
+              "Zettabytes",
+              "Yottabytes",
+              "Bits",
+              "Nibbles",
+              "Kibibytes",
+            ],
+          },
+        },
+      };
+    }
+    getConvertedSize(args) {
+      const bytes = new Blob([args.TEXTO]).size;
+      const unit = args.UNIT;
+      switch (unit) {
+        case "Kilobytes":
+          return bytes / 1000;
+        case "Megabytes":
+          return bytes / Math.pow(1024, 2);
+        case "Gigabytes":
+          return bytes / Math.pow(1024, 3);
+        case "Terabytes":
+          return bytes / Math.pow(1024, 4);
+        case "Petabytes":
+          return bytes / Math.pow(1024, 5);
+        case "Exabytes":
+          return bytes / Math.pow(1024, 6);
+        case "Zettabytes":
+          return bytes / Math.pow(1024, 7);
+        case "Yottabytes":
+          return bytes / Math.pow(1024, 8);
+        case "Bytes":
+          return bytes;
+        case "Bits":
+          return bytes * 8;
+        case "Nibbles":
+          return bytes * 2;
+        case "Kibibytes":
+          return bytes / 1024;
+        default:
+          return 0;
+      }
+    }
+  }
+  Scratch.extensions.register(new DataConverter());
+})(Scratch);
